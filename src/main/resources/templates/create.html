@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html;" charset="UTF-8">
+    <title th:text="${isCreate ? 'Create User' : 'Edit ' + user.getName()}" />
+</head>
+<body>
+
+<form
+        th:method="POST"
+        th:action="${isCreate} ? '/users/create' : '/users/edit?id=' + ${user.getId()}"
+        th:object="${user}"
+        style="display: flex; flex-direction: column; width: fit-content">
+    <input id="name-input" placeholder="Name" min="3" maxlength="50" th:field="*{name}">
+    <input placeholder="Email" maxlength="255" th:field="*{email}">
+    <input placeholder="Age" type="number" max="100" min="1" th:field="*{age}">
+    <br>
+    <div style="display: flex; justify-content: space-between">
+        <a th:href="@{'/users'}">Go Back</a>
+        <button
+                type="submit"
+                style="width: 60px"
+                th:text="${isCreate ? 'Create' : 'Confirm'}"
+        />
+    </div>
+
+</form>
+
+</body>

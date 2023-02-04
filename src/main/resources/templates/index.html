@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Users CRUD</title>
+</head>
+<body>
+<div>
+    <h3 th:if="${users.size() <= 0}">
+        No any user yet, but...
+        you can <a href="/users/create">create</a> one
+    </h3>
+    <table border="1">
+        <tr>
+            <th>Name</th>
+            <th>Age</th>
+            <th>email</th>
+            <th>Action</th>
+        </tr>
+        <tr th:each="user:${users}">
+            <td th:text="${user.getName()}"></td>
+            <td th:text="${user.getAge()}"></td>
+            <td th:text="${user.getemail()}"></td>
+            <td>
+                <a th:href="@{/users/edit(id=${user.getId()})}">Edit</a>
+                <a th:href="@{/users/delete(id=${user.getId()})}">Delete</a>
+            </td>
+
+        </tr>
+
+    </table>
+    <a href="/users/create" th:if="${users.size() > 0}">Create NEW</a>
+
+</div>
+</body>
